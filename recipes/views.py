@@ -1,12 +1,15 @@
-from django.http import HttpResponse
 from django.shortcuts import render
+
+from utils.recipes.factory import make_recipe
 
 
 def home(req):
     return render(req, 'recipes/pages/home.html', context={
-        'name': 'Lucas Queiroz'
+        'recipes': [make_recipe() for _ in range(9)],
     })
 
 
-def about(req):
-    return HttpResponse("WELCOME TO ABOUT PAGE!!!")
+def recipes(req, id):
+    return render(req, 'recipes/pages/recipes-view.html', context={
+        'recipe': make_recipe()
+    })
